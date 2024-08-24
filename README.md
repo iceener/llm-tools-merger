@@ -1,3 +1,8 @@
+
+> ⚠️ **Warning**
+> \
+> This script has been tested on macOS Sonoma 14.1. While it should work on other operating systems, please be aware that there might be slight differences in behavior or performance on other platforms.
+
 # Merger
 
 Merger is a TypeScript script that recursively iterates through files in the current directory and merges them into a single file. This tool is particularly useful when working with Large Language Models (LLMs) to consolidate the contents of a repository into a single context.
