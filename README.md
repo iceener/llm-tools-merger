@@ -20,15 +20,15 @@ Merger is a TypeScript script that recursively iterates through files in the cur
 
 To run the script and generate the merged output file:
 
-\```
+```
 bun merge.ts
-\```
+```
 
 To run the script and log the results to the console without creating a file:
 
-\```
+```
 bun merge.ts --log
-\```
+```
 
 The `--log` option will display the merged content in the console instead of writing it to a file.
 
@@ -49,11 +49,11 @@ By default, the script ignores:
 
 You can create a `.mergeignore` file in the same directory as the script to specify additional ignore patterns. Each line in this file represents a pattern to ignore. For example:
 
-\```
+```
 *.log
 temp/*
 secret.txt
-\```
+```
 
 Patterns support wildcards (`*`) and are matched against the relative path of each file.
 
@@ -61,11 +61,11 @@ Patterns support wildcards (`*`) and are matched against the relative path of ea
 
 The merged output wraps each file's content in XML-like tags:
 
-\```xml
+```xml
 <file location="path/to/file" name="filename.ext">
 File content goes here
 </file>
-\```
+```
 
 This format allows for easy parsing and identification of individual files within the merged output.
 
