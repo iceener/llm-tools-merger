@@ -21,7 +21,7 @@ Merger is a TypeScript script that recursively iterates through files in the cur
 To run the script and generate the merged output file:
 
 ```
-bun merge.ts
+bun merge.ts --path /path/to/directory
 ```
 
 To run the script and log the results to the console without creating a file:
@@ -31,6 +31,28 @@ bun merge.ts --log
 ```
 
 The `--log` option will display the merged content in the console instead of writing it to a file.
+
+## Keyboard Maestro Macro
+
+This script can be easily integrated into your workflow using a Keyboard Maestro macro. This allows you to trigger the merge operation with a simple keyboard shortcut or other automation triggers.
+
+<img src="https://cloud.overment.com/2024-08-24/merger_macro-8c5ba94f-8.png" alt="Keyboard Maestro Macro for Merger" width="600">
+
+You can download the Keyboard Maestro macro [here](https://cloud.overment.com/Merge-Files-From-the-Current-Directory-1724508285.kmmacros).
+
+### Important Notes:
+
+1. **Username Modification**: Before using the macro, you need to modify the macOS directory paths in the macro to match your username. Look for instances of `/Users/yourusername/` and replace `yourusername` with your actual macOS username.
+
+2. **File Permissions**: Ensure that the `index.ts` file has the necessary write permissions. You can do this by running the following command in your terminal:
+
+   ```
+   chmod +w index.ts
+   ```
+
+   This command gives write access to the `index.ts` file.
+
+3. **Bun Installation**: Make sure that Bun is installed and properly set up. Keyboard Maestro requires the full path to the Bun installation folder. You can get this path by running the `which bun` command in your terminal. Use the output of this command in the Keyboard Maestro macro where it calls Bun.
 
 ## Output
 

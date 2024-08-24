@@ -68,12 +68,31 @@ const mergeFiles = async (dir: string, ignorePatterns: string[], shouldLog: bool
   return content;
 };
 
+const isPathSafe = (inputPath: string): boolean => {
+  const normalizedPath = path.normalize(inputPath);
+  const resolvedPath = path.resolve(normalizedPath);
+  return resolvedPath.startsWith(process.cwd());
+};
+
 const main = async (): Promise<void> => {
-  const outputFile = 'merged_output.md';
   const currentDir = path.dirname(fileURLToPath(import.meta.url));
-  const ignorePatterns = await loadIgnorePatterns(currentDir);
+  
+  let targetDir = currentDir;
+  const pathArgIndex = process.argv.indexOf('--path');
+  if (pathArgIndex !== -1 && pathArgIndex + 1 < process.argv.length) {
+    const customPath = process.argv[pathArgIndex + 1];
+    if (isPathSafe(customPath)) {
+      targetDir = path.resolve(customPath);
+    } else {
+      console.error('Error: The provided path is not safe or is outside the current working directory.');
+      process.exit(1);
+    }
+  }
+
+  const outputFile = path.join(targetDir, 'merged_output.md');
+  const ignorePatterns = await loadIgnorePatterns(targetDir);
   const shouldLog = process.argv.includes('--log');
-  const mergedContent = await mergeFiles(currentDir, ignorePatterns, shouldLog);
+  const mergedContent = await mergeFiles(targetDir, ignorePatterns, shouldLog);
   await fs.writeFile(outputFile, mergedContent);
   if (shouldLog) console.log(`Merged files into ${outputFile}`);
 };
